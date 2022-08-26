@@ -1,5 +1,14 @@
 const express = require("express");
 
+const mongoose = require('mongoose');
+const dbKeys = require('../db/dbKeys');
+
+const { login, password } = dbKeys;
+mongoose.connect(`mongodb+srv://${login}:${password}@cluster0.stmjhgd.mongodb.net/?retryWrites=true&w=majority`);
+
+const db = mongoose.connection;
+db.on('err', console.error.bind(console, 'connection error:'));
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
